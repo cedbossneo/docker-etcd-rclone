@@ -1,1 +1,1 @@
-*/5 * * * * /root/backup.sh
+* * * * * /root/backup.sh

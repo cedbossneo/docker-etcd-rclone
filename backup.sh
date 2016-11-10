@@ -1,8 +1,8 @@
 #!/bin/sh
-rm -Rf /opt/etcd-backup
-etcdctl backup \
-      --data-dir /opt/etcd/data \
-      --wal-dir /opt/etcd/wal \
-      --backup-dir /opt/etcd-backup/data
-      --backup-wal-dir /opt/etcd-backup/wal
+output=/opt/etcd-backup/latest
+echo -n "" > $output
+etcdctl ls --recursive -p --sort | grep -v '.*/$' | while read line; do (echo -n "$line" && echo -n '==='&& etcdctl get "$line") >> $output; done;
+DATE=$(date +"%Y-%m-%d-%H-%M")
+cp -f $output /opt/etcd-backup/$DATE
 /usr/bin/rclone copy /opt/etcd-backup Openstack:etcd-${TOKEN}
+find /opt/etcd-backup -mtime +5 -exec rm {} \;
