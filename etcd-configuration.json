@@ -1,0 +1,15 @@
+{
+  "cluster": {
+    "leader": "http://127.0.0.1:2379",
+    "machines": [
+      "http://127.0.0.1:2379"
+    ]
+  },
+  "config": {
+    "certFile": "",
+    "keyFile": "",
+    "caCertFiles": [],
+    "timeout": 10000000000000,
+    "consistency": "STRONG"
+  }
+}
